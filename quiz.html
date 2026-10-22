@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الاختبارات القبلية القصيرة</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--tx:#16233b;--mut:#5b6678;--pri:#1f3a68;--ok:#1b7f4b;--bad:#b3261e;--bd:#d5dbe6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151f;--card:#1a2232;--tx:#e8edf6;--mut:#9aa6bb;--pri:#8fb2ee;--ok:#5fd394;--bad:#ff8a80;--bd:#2c374d}}
+:root[data-theme="dark"]{--bg:#10151f;--card:#1a2232;--tx:#e8edf6;--mut:#9aa6bb;--pri:#8fb2ee;--ok:#5fd394;--bad:#ff8a80;--bd:#2c374d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,"Segoe UI",Tahoma,sans-serif;line-height:1.7}
+main{max-width:640px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin:12px 0}
+h1{font-size:1.25rem;color:var(--pri);margin:8px 0}h2{font-size:1.05rem;color:var(--pri);margin:18px 0 4px}
+.sub{color:var(--mut);font-size:.85rem}
+button,input[type=text],textarea{font:inherit;color:var(--tx)}
+.btn{display:block;width:100%;background:var(--pri);color:var(--bg);border:0;border-radius:12px;padding:12px;margin:8px 0;font-weight:700;font-size:1rem}
+input[type=text],textarea{width:100%;box-sizing:border-box;background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:10px}
+label.opt{display:flex;gap:10px;align-items:center;padding:8px 6px;border-radius:8px}
+.q b{display:block;margin-bottom:2px}
+.right{color:var(--ok)}.wrong{color:var(--bad)}
+.score{font-size:1.6rem;font-weight:800;color:var(--pri);text-align:center}
+</style>
+</head>
+<body>
+<main>
+<h1 id="t">الاختبارات القبلية القصيرة</h1>
+<div class="sub">المحور 7 • تحسين نتائج المتعلمين • متوسطة الحسن البصري • 1448 هـ<br>ملف إنجاز المعلم: نواف سعد النفيسي</div>
+<div id="app"></div>
+</main>
+<script>
+var TESTS=[
+{name:"اختبار قبلي: الشغل والجهد",mc:[
+["الشغل في الفيزياء يحدث عندما:",["تؤثر قوة في جسم فيتحرك","نفكر كثيرًا","نجلس"],0],
+["وحدة قياس الشغل هي:",["نيوتن","جول","متر"],1],
+["أي مما يلي يُعد شغلًا؟",["دفع عربة فتحركت","الوقوف في المكان","النظر إلى الكتاب"],0],
+["إذا لم يتحرك الجسم فإن الشغل يساوي:",["صفرًا","كبيرًا","10"],0],
+["طالب رفع حقيبة من الأرض إلى الطاولة، هل بذل شغلًا؟",["نعم","لا","أحيانًا"],0]],
+tf:[["كل جهد يبذله الإنسان يسمى شغلًا في الفيزياء.",0],["دفع الجدار دون أن يتحرك ليس شغلًا.",1],["الشغل يحدث عند وجود قوة وحركة.",1],["الطالب الذي يذاكر جالسًا بذل شغلًا فيزيائيًا.",0]],
+q10:"اكتب معادلة الشغل: الشغل = ........ × ........",ans:"الشغل = القوة × المسافة"},
+{name:"اختبار قبلي: قوانين نيوتن الثلاثة",mc:[
+["القانون الأول لنيوتن يسمى قانون:",["القصور الذاتي","الجاذبية","الطفو"],0],
+["الجسم الساكن يبقى ساكنًا ما لم تؤثر عليه:",["قوة","ضوء","حرارة"],0],
+["عند زيادة القوة على جسم (والكتلة ثابتة) فإن تسارعه:",["يزداد","يقل","لا يتغير"],0],
+["أي الجسمين أصعب في تحريكه؟",["كرة قدم","سيارة","متساويان"],1],
+["لكل فعل رد فعل:",["يساويه ويعاكسه في الاتجاه","أكبر منه","لا يوجد"],0]],
+tf:[["الجسم المتحرك يستمر في حركته ما لم تؤثر عليه قوة.",1],["الجسم الأكبر كتلة يحتاج قوة أكبر ليتحرك.",1],["الجسم الساكن يتحرك وحده دون أي قوة.",0],["عند توقف الحافلة فجأة يندفع الركاب إلى الخلف.",0]],
+q10:"اكتب قانون نيوتن الأول: الجسم الساكن ........",ans:"يبقى ساكنًا ما لم تؤثر عليه قوة خارجية"}];
+var app=document.getElementById("app"),cur=null;
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function home(){
+ app.innerHTML='<div class="card"><b>اسم الطالب</b><input type="text" id="nm" placeholder="اكتب اسمك الثلاثي"><div class="sub" style="margin-top:8px">اختر الاختبار:</div>'+
+ TESTS.map(function(t,i){return '<button class="btn" data-i="'+i+'">'+t.name+'</button>'}).join("")+'</div>';
+ app.querySelectorAll("button").forEach(function(b){b.onclick=function(){
+  var n=document.getElementById("nm").value.trim();
+  if(!n){alert("اكتب اسمك أولًا");return}
+  start(+b.dataset.i,n)}});
+}
+function start(i,n){
+ cur={i:i,n:n};var t=TESTS[i],h='<div class="sub">الطالب: '+esc(n)+'</div><h2>'+t.name+'</h2><h2>أولًا: اختر الإجابة الصحيحة (5 درجات)</h2>';
+ t.mc.forEach(function(q,k){h+='<div class="card q"><b>'+(k+1)+'- '+q[0]+'</b>'+q[1].map(function(o,j){return '<label class="opt"><input type="radio" name="m'+k+'" value="'+j+'"> '+o+'</label>'}).join("")+'</div>'});
+ h+='<h2>ثانيًا: صح أم خطأ (4 درجات)</h2>';
+ t.tf.forEach(function(q,k){h+='<div class="card q"><b>'+(k+6)+'- '+q[0]+'</b><label class="opt"><input type="radio" name="t'+k+'" value="1"> صح</label><label class="opt"><input type="radio" name="t'+k+'" value="0"> خطأ</label></div>'});
+ h+='<h2>ثالثًا: أكمل بالكتابة (درجة واحدة)</h2><div class="card q"><b>10- '+t.q10+'</b><textarea id="q10" rows="2"></textarea></div><button class="btn" id="go">إنهاء وعرض النتيجة</button>';
+ app.innerHTML=h;window.scrollTo(0,0);
+ document.getElementById("go").onclick=finish;
+}
+function finish(){
+ var t=TESTS[cur.i],s=0,rows="",un=0;
+ t.mc.forEach(function(q,k){var r=document.querySelector('input[name="m'+k+'"]:checked');
+  if(!r){un++;return}});
+ t.tf.forEach(function(q,k){if(!document.querySelector('input[name="t'+k+'"]:checked'))un++});
+ if(un&&!confirm("باقي "+un+" أسئلة بدون إجابة. تبغى تنهي؟"))return;
+ t.mc.forEach(function(q,k){var r=document.querySelector('input[name="m'+k+'"]:checked'),ok=r&&+r.value===q[2];if(ok)s++;
+  rows+='<div class="q"><b>'+(k+1)+'- '+q[0]+'</b><span class="'+(ok?'right':'wrong')+'">'+(ok?'✔ صحيحة':'✘ الصحيح: '+q[1][q[2]])+'</span></div>'});
+ t.tf.forEach(function(q,k){var r=document.querySelector('input[name="t'+k+'"]:checked'),ok=r&&+r.value===q[1];if(ok)s++;
+  rows+='<div class="q"><b>'+(k+6)+'- '+q[0]+'</b><span class="'+(ok?'right':'wrong')+'">'+(ok?'✔ صحيحة':'✘ الصحيح: '+(q[1]?'صح':'خطأ'))+'</span></div>'});
+ var a10=document.getElementById("q10").value.trim();
+ var msg=cur.n+" | "+t.name+" | الدرجة: "+s+"/9 (والسؤال 10 يصححه المعلم) | إجابة س10: "+(a10||"—");
+ app.innerHTML='<div class="card"><div class="sub" style="text-align:center">'+esc(cur.n)+'</div><div class="score">'+s+' / 9</div><div class="sub" style="text-align:center">السؤال 10 (درجة واحدة) يصححه المعلم</div></div>'+
+ '<div class="card">'+rows+'<div class="q"><b>10- '+t.q10+'</b>إجابتك: '+esc(a10||"—")+'<br><span class="right">الإجابة النموذجية: '+t.ans+'</span></div></div>'+
+ '<div class="card"><b>أرسل نتيجتك للمعلم</b><textarea id="res" rows="3" readonly>'+esc(msg)+'</textarea><button class="btn" id="cp">نسخ النتيجة</button><div class="sub">انسخها وأرسلها للمعلم، أو صوّر الشاشة.</div></div><button class="btn" id="hm">اختبار آخر</button>';
+ document.getElementById("cp").onclick=function(){var e=document.getElementById("res");e.select();try{navigator.clipboard.writeText(msg)}catch(x){}try{document.execCommand("copy")}catch(x){};this.textContent="تم النسخ ✔"};
+ document.getElementById("hm").onclick=home;window.scrollTo(0,0);
+}
+home();
+</script>
+</body>
+</html>
